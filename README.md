@@ -25,7 +25,11 @@ The physical controller is very much a prototype. It's an ESP32 with two buttons
 
 The earliest version of this piece was a motion-based piece that tracked people's motion over time and displayed their silhouette on the screen (it would fade over time). I might return to this idea at some point, my concern about it was that very few people could interact with it at once.
 
+<img width="600px" alt="Screenshot 2025-03-08 at 1 15 09 AM" src="https://github.com/user-attachments/assets/c23ca4d8-61d8-4fe2-b9fc-cdeac8b7d34b" />
+
 Then I started working towards this idea of tracking people's motion from a birds eye view. Once someone entered the classroom we'd track their motion through it (like an Amazon self-checkout store... ugh now that sound creepy). I couldn't figure out the camera setup for this but I'd like to return to the idea of distributing out where people can interact with the art.
+
+<img width="600px" alt="Screenshot 2025-03-08 at 1 15 44 AM" src="https://github.com/user-attachments/assets/83dd9c13-2cec-487a-bb6d-8f6faf35341d" />
 
 I started building the project by building the physics simulation. I used [an old workshop](https://github.com/hackclub/hackclub/tree/main/workshops/particle_physics) that I had seen / helped make at hackathon as the base for my work; it had described most of the physics logic but I expanded it to make it more "displayable" (splitting, repeling, and wrap around movement).
 
@@ -40,6 +44,8 @@ Lastly, it was time to make the physical controller! I'd left this part until la
 (Red wires for power, blue for GND, and green for GPIO)
 
 Working with the ESP32 was a bit of a nightmare; for example, the datasheets online all had different GPIO pin mappings and trying to figure out the right one for my model was difficult. Until I noticed this in my backpack...
+
+<img width="600" alt="Screenshot 2025-03-08 at 1 17 45 AM" src="https://github.com/user-attachments/assets/870f3733-1cab-4c84-bc05-e9355807d65e" />
 
 It was that sort of evening. But anyways, once I had finally gotten readings from my buttons and potentiometers, it was time to code this up! I used a library that handles WebSockets on the Arduino and hooked it into the server.
 
