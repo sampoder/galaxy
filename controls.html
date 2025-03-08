@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.min.js"></script>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <link href="nouislider.css" rel="stylesheet">
+  <script src="nouislider.js"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕹️</text></svg>">
+  <title>Control your planet</title>
+</head>
+
+<body style="min-height: 100vh;">
+  
+  <div style="display: grid; min-height: 100vh; grid-template-rows: 2fr 1fr; gap: 24px;">
+    <div style="margin: 16px; display: flex; flex-direction: column;">
+      <div>
+        <div id="canvas-wrapper" style="display: flex; justify-content: center; align-items: center; margin-bottom: 16px">
+        </div>
+        <h1 style="font-size: 4em; flex-grow: 1; margin: 0px;">Planet #<span id="number"></span></h1>
+      </div>
+      <div id="slider" style="flex-grow: 1; width: 92vw; margin: auto; margin-top: 32px"></div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr">
+      <div onclick="triggerSplit()" style="background: #338eda" class="button">
+        Trigger Split
+      </div>
+      <div onclick="toggleRepel()" style="background: #a633d6" class="button">
+        Toggle Repel
+      </div>
+    </div>
+  </div>
+  <script>
+    let socket = io();
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let id = urlParams.get('id')
+    document.getElementById("number").innerText = id
+    
+    function triggerSplit() {
+      socket.emit('triggerSplit', { id })
+    }
+    
+    function toggleRepel() {
+      socket.emit('toggleRepel', { id })
+    }
+    
+    var slider = document.getElementById('slider');
+    
+    noUiSlider.create(slider, {
+        start: 2,
+        connect: true,
+        orientation: 'vertical',
+        height: '100px',
+        direction: 'rtl',
+        range: {
+            'min': 1,
+            'max': 10
+        }
+    });
+    
+    slider.noUiSlider.on('change', function (values) { 
+      socket.emit('updateMass', { id, massMultiplier: values[0] })
+    });
+  </script>
+  <style>
+    body {
+      font-family: "Futura";
+      text-align: center;
+    }
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 48px;
+      text-align: center;
+    }
+    .noUi-handle {
+      width: calc(92vw + 12px)!important;
+    }
+  </style>
+  <script src="controls/sketch.js"></script>
+</body>
+
+</html>

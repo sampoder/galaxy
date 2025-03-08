@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.min.js"></script>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <title>Planets!</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍🚀</text></svg>">
+</head>
+
+<body>
+  <script src="particle.js"></script>
+  <script src="sketch.js"></script>
+  <img id="qr" src="https://quickchart.io/qr?margin=2&size=250&text=https://planets.sampoder.com/join" height="250px" style="position: absolute; bottom: 16px; right: 16px; border-radius: 24px;"/>
+</body>
+
+<script>
+  document.getElementById("qr").src = `https://quickchart.io/qr?margin=2&size=250&text=${window.location.href}join`
+</script>
+
+</html>
