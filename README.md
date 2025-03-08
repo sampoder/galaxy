@@ -23,17 +23,11 @@ The physical controller is very much a prototype. It's an ESP32 with two buttons
 
 <img width="600px" src="https://github.com/user-attachments/assets/03a07059-1a23-4c7a-94e9-d64f2a2f35e9" />
 
-The original inspiration was a light-up plane that I drew in class (not a super serious idea), alongside some other ideas:
+The earliest version of this piece was a motion-based piece that tracked people's motion over time and displayed their silhouette on the screen (it would fade over time). I might return to this idea at some point, my concern about it was that very few people could interact with it at once.
 
-<img width="600px" src="https://github.com/user-attachments/assets/9f39fe87-e353-4962-9282-d947e2cee3c9" />
+Then I started working towards this idea of tracking people's motion from a birds eye view. Once someone entered the classroom we'd track their motion through it (like an Amazon self-checkout store... ugh now that sound creepy). I couldn't figure out the camera setup for this but I'd like to return to the idea of distributing out where people can interact with the art.
 
-People already complain about the noise planes make - I doubt too many people would enjoy them creating this amount of light (I think it'd be cool though!). That did get me thinking transportation as a theme though. 
-
-And that thinking progressed into this idea of reconstructing the entire BART station (each train represented a different direction):
-
-<img width="600" alt="Screenshot 2025-02-21 at 6 19 33 PM" src="https://github.com/user-attachments/assets/63eda38b-8af6-4f86-8f56-26bfdb0658dc" />
-
-However, I ended up going with one train because I thought this design would be bulky and take up too much space on my desk. I decided that if I wanted to illustrate direction I could animate a strip of Neopixels in the future.
+I started building the 
 
 To create the shell for the project, I designed a couple of pieces I could laser cut using Figma. Figma probably isn't the best software for this - but it's something I'm very comfortable with and that I knew could do the job. With more time, I would have CAD-ed it.
 
