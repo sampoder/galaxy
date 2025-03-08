@@ -8,7 +8,7 @@ TLDR: it's a physics simulation where everyone in the room is a planet; as the p
 
 I love learning things and I like to do that by getting my hands dirty... that can be pretty hard at a galactic scale. At the same time, I also really enjoy creating things where people use my creation / interact with my creation. That's what I feel like what I've been working on so far has been missing and I wanted to experiment with that concept in this project.
 
-I built an interactive art display that's at it's core is a basic particle physics simulation. You have a collection of planets / particles (circles on the screen) that are orbiting around one another. Each particle has its own gravitational field. What makes it special is that every planet represents a person viewing the art piece and they have control over this planet through a physical controller or a mobile website.
+I built an interactive art display that's a particle physics simulation. You have a collection of planets / particles (circles on the screen) that are orbiting around one another. Each particle has its own gravitational field. What makes it special is that every planet represents a person viewing the art piece and they have control over this planet through a physical controller or a mobile website.
 
 Here's what it looked like:
 
@@ -19,7 +19,7 @@ And here are what the mobile and physical controllers look like:
 <img src="https://github.com/user-attachments/assets/dde19e1f-f8a6-4b19-b44e-25529f1d033a" width="300px" />
 <img src="https://github.com/user-attachments/assets/b7267152-09af-4934-9387-1b81d5d37533" width="300px" />
 
-The physical controller is very much a prototype. It's an ESP32 with two buttons for triggers and a potentiometer for changing the mass of it's associated particle. It uses the _arduinoWebSockets_ library to connect to the Node.js / express server running an instance of _socket.io_. This server takes incoming events and emits them to the display client. The display client is an art piece built in _p5.js_ and it handles those incoming events through JavaScript. The mobile controller is a HTML, CSS & JS website that uses socket.io to communicate with the display via the server.
+The physical controller is very much a prototype. It's an ESP32 with two buttons for triggers and a potentiometer for changing the mass of its associated particle. It uses the _arduinoWebSockets_ library to connect to the Node.js / express server running an instance of _socket.io_. This server takes incoming events and emits them to the display client. The display client is an art piece built in _p5.js_ and it handles those incoming events through JavaScript. The mobile controller is a HTML, CSS & JS website that uses socket.io to communicate with the display via the server.
 
 <img width="600px" src="https://github.com/user-attachments/assets/03a07059-1a23-4c7a-94e9-d64f2a2f35e9" />
 
@@ -27,17 +27,17 @@ The earliest version of this piece was a motion-based piece that tracked people'
 
 <img width="600px" alt="Screenshot 2025-03-08 at 1 15 09 AM" src="https://github.com/user-attachments/assets/c23ca4d8-61d8-4fe2-b9fc-cdeac8b7d34b" />
 
-Then I started working towards this idea of tracking people's motion from a birds eye view. Once someone entered the classroom we'd track their motion through it (like an Amazon self-checkout store... ugh now that sound creepy). I couldn't figure out the camera setup for this but I'd like to return to the idea of distributing out where people can interact with the art.
+Then I started working towards this idea of tracking people's motion from a birds eye view. Once someone entered the classroom we'd track their motion through it (like an Amazon self-checkout store... ugh now that sounds creepy). I couldn't figure out the camera setup for this but I'd like to return to the idea of distributing out where people can interact with the art.
 
 <img width="600px" alt="Screenshot 2025-03-08 at 1 15 44 AM" src="https://github.com/user-attachments/assets/83dd9c13-2cec-487a-bb6d-8f6faf35341d" />
 
-I started building the project by building the physics simulation. I used [an old workshop](https://github.com/hackclub/hackclub/tree/main/workshops/particle_physics) that I had seen / helped make at hackathon as the base for my work; it had described most of the physics logic but I expanded it to make it more "displayable" (splitting, repeling, and wrap around movement).
+I started building the project by building the physics simulation. I used [an old workshop](https://github.com/hackclub/hackclub/tree/main/workshops/particle_physics) that I had seen / helped make at hackathon as the base for my work; it had described most of the physics logic but I expanded it to make it more "displayable" (splitting, repelling, and wrap around movement).
 
 From there I start scaffolding out what the websocket server would look like. I made a list of events that it would need to be able to handle and the events that it would need to emit. Then I returned to my p5.js code for the display and implemented the handling of these events (eg. `massChanged`). At this point I was just simulating the event triggers.
 
 Afterwards, I built the mobile control website. It was mainly an emitter of events based on when buttons were clicked. I did my best to make sure that the styling was mobile-friendly, as a result everything looks a bit big in the desktop version.
 
-Lastly, it was time to make the physical controller! I'd left this part until last because I wanted to go a feel of whether the project was viable before doing the highest commitment piece. Here's the circuit I design:
+Lastly, it was time to make the physical controller! I'd left this part until last because I wanted to get a feel of whether the project was viable before doing the highest commitment piece. Here's the circuit I design:
 
 <img width="661" alt="Screenshot 2025-03-07 at 9 48 21 PM" src="https://github.com/user-attachments/assets/f8cfe0c4-4b46-4176-b9e3-eb634d929d7b" />
 
@@ -53,7 +53,7 @@ It was that sort of evening. But anyways, once I had finally gotten readings fro
 
 This project didn't quite go to plan as much - I think the end product was alright but the process was frustrating. A lot of the time, I was feeling fairly uncreative and stuck. I guess this stemmed from me struggling to come up with an idea originally.
 
-What I'm submitting (this) is also my second project I built for this assignment. My first one (a replica of the SF cable car system) didn't quite go to plan. I'd built out the box but I left designing the motor / pulley system too late and with the limited resources I had, I couldn't figure out a clean way of doing it. I was also left feeling pretty uninspired by the project at that point (Wednesday night), I think this was largely because I couldn't see what it's wow factor was. There wasn't like a golden moment when viewing it; it just felt like something that you'd run in the background and it'd go unnoticed.
+What I'm submitting (this) is also my second project I built for this assignment. My first one (a replica of the SF cable car system) didn't quite go to plan. I'd built out the box but I left designing the motor / pulley system too late and with the limited resources I had, I couldn't figure out a clean way of doing it. I was also left feeling pretty uninspired by the project at that point (Wednesday night), I think this was largely because I couldn't see what its wow factor was. There wasn't like a golden moment when viewing it; it just felt like something that you'd run in the background and it'd go unnoticed.
 
 But! I did make a fair bit of progress making it:
 
@@ -63,7 +63,7 @@ Here's me trying to make pencils work as pillars (by cutting them to height with
 
 <img width="372" alt="Screenshot 2025-03-07 at 9 59 11 PM" src="https://github.com/user-attachments/assets/facbbac7-de11-4a77-8d17-fbd527c49ad5" />
 
-So that's that. Back to my end project! I was pretty happy with how the demo had gone, though it did crash which (re)taught me the importance of stress-testing before demoing something. I think this project showed me that the idea of interactive art is one worth pursing but I think my implementation was a bit lacking here. Some things that come to mind here are:
+So that's that. Back to my end project! I was pretty happy with how the demo had gone, though it did crash which (re)taught me the importance of stress-testing before demoing something. I think this project showed me that the idea of interactive art is one worth pursuing but I think my implementation was a bit lacking here. Some things that come to mind here are:
 
 * Better way to identify your particle
 * A way to interact with others through the article - imagine battling with your particle?
