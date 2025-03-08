@@ -7,7 +7,8 @@ let socket = io();
 
 function setup () {
   createCanvas(windowWidth, windowHeight);
-  particles.push(createParticle(999))
+  particles.push(createParticle(999)) // used by the physical controller
+  // creates some stars for the background
   for (let i = 0; i < 200; i++) {
     stars.push({
       x: random(width),
@@ -22,22 +23,19 @@ function draw () {
   
   noStroke();
   fill(255, 255, 255, 150); // Slight transparency for stars
-  for (const star of stars) {
+  for (const star of stars) { // draw all stars
     ellipse(star.x, star.y, star.size, star.size);
   }
 
+  // calculate the interactions of every particle
   for (const particleA of particles)
     for (const particleB of particles)
       if (particleA !== particleB) particleA.physics(particleB)
 
-  for (const particle of particles) {
+  for (const particle of particles) { // draw the particles
     particle.update()
     particle.draw()
   }
-}
-
-function mousePressed () {
-  particles.push(createParticle(createVector(mouseX, mouseY)))
 }
 
 function createParticle (id, pos, mass) {
@@ -54,7 +52,7 @@ socket.on('newParticle', function(msg) {
 
 socket.on('toggleRepel', function(msg) {
   for(let i = 0; i < particles.length; i++){
-    if(particles[i].id == msg.id){
+    if(particles[i].id == msg.id){ // loop through every particle and check if this is a target particle
       particles[i].mass = -1 * particles[i].mass
     }
   }
@@ -63,8 +61,8 @@ socket.on('toggleRepel', function(msg) {
 socket.on('updateMass', function(msg) {
   for(let i = 0; i < particles.length; i++){
     if(particles[i].id == msg.id){
-      particles[i].massMultiplier = (msg.massMultiplier % 11)
-      particles[i].setMass((1/1) * particles[i].mass)
+      particles[i].massMultiplier = (msg.massMultiplier % 11) // mod math to cap it at 10
+      particles[i].setMass(particles[i].mass)
     }
   }
 });
@@ -73,7 +71,7 @@ socket.on('triggerSplit', function(msg) {
   let newParticles = []
   for(let i = 0; i < particles.length; i++){
     if(particles[i].id == msg.id){
-      particles[i].setMass((1/2) * particles[i].mass)
+      particles[i].setMass((1/2) * particles[i].mass) // half the size of the particle being split
       newParticles.push(createParticle(msg.id, null, particles[i].mass))
     }
   }
