@@ -19,13 +19,9 @@ And here are what the mobile and physical controllers look like:
 <img src="https://github.com/user-attachments/assets/dde19e1f-f8a6-4b19-b44e-25529f1d033a" width="300px" />
 <img src="https://github.com/user-attachments/assets/b7267152-09af-4934-9387-1b81d5d37533" width="300px" />
 
-The physical controller is very much a prototype.
+The physical controller is very much a prototype. It's an ESP32 with two buttons for triggers and a potentiometer for changing the mass of it's associated particle. It uses the _arduinoWebSockets_ library to connect to the Node.js / express server running an instance of _socket.io_. This server takes incoming events and emits them to the display client. The display client is an art piece built in _p5.js_ and it handles those incoming events through JavaScript. The mobile controller is a HTML, CSS & JS website that uses socket.io to communicate with the display via the server.
 
-<img width="600px" alt="Screenshot 2025-02-14 at 12 00 05 AM" src="https://github.com/user-attachments/assets/76a8ae04-1055-41f5-9798-839b90f75e83" />
-
-The finished piece is a replica BART train that was made out of laser cut / engraved acrylic. It has two RGB LEDs inside of it (these make the colour). When connected to a computer running the Python script, it lights up when a train is at the configured station. This data is pulled from [BART's legacy API](https://api.bart.gov/docs/overview/index.aspx). The Python script then commands the Arduino to light the train up a certain colour via serial communication. The colour of the train is based on the BART line, for example trains to Berryessa from Downtown Berkeley are orange while trains to Millbrae / San Francisco are red.
-
-<img width="600px" alt="Screenshot 2025-02-14 at 12 00 15 AM" src="https://github.com/user-attachments/assets/22ee0e2e-b6b2-4929-9a2c-0b7c25c6c823" />
+<img width="600px" src="https://github.com/user-attachments/assets/03a07059-1a23-4c7a-94e9-d64f2a2f35e9" />
 
 The original inspiration was a light-up plane that I drew in class (not a super serious idea), alongside some other ideas:
 
