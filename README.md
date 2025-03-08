@@ -27,66 +27,64 @@ The earliest version of this piece was a motion-based piece that tracked people'
 
 Then I started working towards this idea of tracking people's motion from a birds eye view. Once someone entered the classroom we'd track their motion through it (like an Amazon self-checkout store... ugh now that sound creepy). I couldn't figure out the camera setup for this but I'd like to return to the idea of distributing out where people can interact with the art.
 
-I started building the 
+I started building the project by building the physics simulation. I used [an old workshop](https://github.com/hackclub/hackclub/tree/main/workshops/particle_physics) that I had seen / helped make at hackathon as the base for my work; it had described most of the physics logic but I expanded it to make it more "displayable" (splitting, repeling, and wrap around movement).
 
-To create the shell for the project, I designed a couple of pieces I could laser cut using Figma. Figma probably isn't the best software for this - but it's something I'm very comfortable with and that I knew could do the job. With more time, I would have CAD-ed it.
+From there I start scaffolding out what the websocket server would look like. I made a list of events that it would need to be able to handle and the events that it would need to emit. Then I returned to my p5.js code for the display and implemented the handling of these events (eg. `massChanged`). At this point I was just simulating the event triggers.
 
-Here's my Figma setup:
+Afterwards, I built the mobile control website. It was mainly an emitter of events based on when buttons were clicked. I did my best to make sure that the styling was mobile-friendly, as a result everything looks a bit big in the desktop version.
 
-<img width="600" alt="Screenshot 2025-02-21 at 6 28 43 PM" src="https://github.com/user-attachments/assets/6a1e16cc-caa9-44cc-bf45-9338ee658e4b" />
+Lastly, it was time to make the physical controller! I'd left this part until last because I wanted to go a feel of whether the project was viable before doing the highest commitment piece. Here's the circuit I design:
 
-I then exported this as an SVG and set it up in Adobe Illustrator to be laser cut. I did this all at the [Jacobs Hall Makerspace](https://jacobsinstitute.berkeley.edu/making-at-jacobs/).
+<img width="661" alt="Screenshot 2025-03-07 at 9 48 21 PM" src="https://github.com/user-attachments/assets/f8cfe0c4-4b46-4176-b9e3-eb634d929d7b" />
 
-The first laser cut had a slight problem, the engraving was too faint so it was hard to distinguish the train design (I was engraving most of the acrylic and leaving the outline of train un-engraved):
+(Red wires for power, blue for GND, and green for GPIO)
 
-<img width="600" src="https://github.com/user-attachments/assets/841f2f24-9a86-47bc-8b55-f44e0a48e0d8" />
+Working with the ESP32 was a bit of a nightmare; for example, the datasheets online all had different GPIO pin mappings and trying to figure out the right one for my model was difficult. Until I noticed this in my backpack...
 
-(you can see how it's a bit patchy)
-
-This was because the laser cutter / engraver is stronger in the centre. Going forward, I did my future engraving from the centre of the bed.
-
-So now I had the shell of it! I hot-glued all the pieces together to make the full train. Next step was wiring, here's what the circuit looked like:
-
-<img width="600" alt="Screenshot 2025-02-21 at 6 46 00 PM" src="https://github.com/user-attachments/assets/236564f9-3857-4f54-9d41-047e129eee6a" />
-
-Last thing to do was to program it! As I mentioned earlier I'm running a Python script on my laptop and communicating with Arduino using serial. I originally used the [Transit App's API](https://transitapp.com/apis) but it was probably overkill for this purpose. Though using this knowledge, I built this little menu bar app to help me keep track of transit nearby:
-
-<img width="401" alt="Screenshot 2025-02-21 at 6 52 58 PM" src="https://github.com/user-attachments/assets/6fa3454e-8984-4b03-8489-a8fe6f893d57" />
-
-But anyways! With it coded up, I now had a working thing. Just imagine if there was a purple BART line:
-
-<img width="600px" alt="Screenshot 2025-02-14 at 12 00 52 AM" src="https://github.com/user-attachments/assets/337af8bd-26f2-4a38-8a45-2d2378e87b7d" />
-
-And here's the noise it makes if the train is leaving:
-
-https://github.com/user-attachments/assets/8d63fbfe-5397-4607-a32a-b0ea8b4b94a8
+It was that sort of evening. But anyways, once I had finally gotten readings from my buttons and potentiometers, it was time to code this up! I used a library that handles WebSockets on the Arduino and hooked it into the server.
 
 ## Reflection
 
-I had a lot of fun making this! I don't think I'd used a laser cutter since high school before this (sadly) and it was great to try out some new APIs I hadn't used either. Plus BART makes me happy so seeing this thing on my mantlepiece everyday makes me happy (I had to use the Arduino for more projects)!
+This project didn't quite go to plan as much - I think the end product was alright but the process was frustrating. A lot of the time, I was feeling fairly uncreative and stuck. I guess this stemmed from me struggling to come up with an idea originally.
 
-<img width="600px" alt="Screenshot 2025-02-21 at 7 01 02 PM" src="https://github.com/user-attachments/assets/0cdc0c37-27f0-40e3-a97f-7d44894fde3c" />
+What I'm submitting (this) is also my second project I built for this assignment. My first one (a replica of the SF cable car system) didn't quite go to plan. I'd built out the box but I left designing the motor / pulley system too late and with the limited resources I had, I couldn't figure out a clean way of doing it. I was also left feeling pretty uninspired by the project at that point (Wednesday night), I think this was largely because I couldn't see what it's wow factor was. There wasn't like a golden moment when viewing it; it just felt like something that you'd run in the background and it'd go unnoticed.
 
-This project started with me building something practical but over time it morphed into having a different message. Not missing the train became less important to the story because as I showed it people, it became clear to me that people enjoyed it because it reminded them of fond memories using BART. BART is critical infrastructure for me and my peers - only a few of us have cars and the logistics of driving in the Bay Area is a nightmare. So we use BART for everything and anything; I think that's why this made people smile when I showed it to them. Plus anything that lights up is cool! Waiting for the train is also a universal experience, so in a way, this piece highlights the importance of funding BART so it can have more frequent schedules / they can reduce the wait times. [That's a relevant topic at the moment.](https://www.bart.gov/about/financials/crisis)
+But! I did make a fair bit of progress making it:
+
+<img width="689" alt="Screenshot 2025-03-07 at 9 59 24 PM" src="https://github.com/user-attachments/assets/f50f2e5d-02d0-4c17-a8b9-527e577db5e3" />
+
+Here's me trying to make pencils work as pillars (by cutting them to height with our kitchen knife), my roommates were amused lets say:
+
+<img width="372" alt="Screenshot 2025-03-07 at 9 59 11 PM" src="https://github.com/user-attachments/assets/facbbac7-de11-4a77-8d17-fbd527c49ad5" />
+
+So that's that. Back to my end project! I was pretty happy with how the demo had gone, though it did crash which (re)taught me the importance of stress-testing before demoing something. I think this project showed me that the idea of interactive art is one worth pursing but I think my implementation was a bit lacking here. Some things that come to mind here are:
+
+* Better way to identify your particle
+* A way to interact with others through the article - imagine battling with your particle?
+
+I want to do more of this because I saw the joy in people's faces for the first ten seconds - I just need to hold that joy / give them a reason to keep engaging with the project.
 
 If I was to make the project again, there'd be a couple of things I'd change:
 
-* Designing joints for my laser cut pieces so I wouldn't have had to hot glue the piece together.
-* Modelling the train in CAD - this would have allowed me to properly create the diagonal shape of a BART train. Plus I want to improve my CAD skills so I can do more.
-* Using an ESP32. That would have allowed me to make API calls from my Arduino code directly and not have to run a separate Python script.
+* Designing a case for the controller and including a battery in it (this was something I'd hoped to do but time got the better of me)
+* Adding more depth to the shapes, the planets had no texture so they just looked like circles on a screen
+* Implementing more maths / physics to make it more of a learning experience.
+  * This is something I'd like to explore more in this class; art is a great way to learn.
+ 
+I am pretty proud that of my three "next times" from the last project, I've done them all either in this project or through my half-done tram system:
 
-This project isn't going to waste. I'm using my electronics for future projects and keeping the structure as an ornament on my mantlepiece.
+> * Designing joints for my laser cut pieces so I wouldn't have had to hot glue the piece together.
+> * Modelling the train in CAD - this would have allowed me to properly create the diagonal shape of a BART train. Plus I want to improve my CAD skills so I can do more.
+> * Using an ESP32. That would have allowed me to make API calls from my Arduino code directly and not have to run a separate Python script.
 
-But at the end of the day, the most fun part of this project was showing it to friends and seeing them smile as it lit up. So thanks to everyone who said nice things about it and gave me helpful feedback!
+Neither project is going to waste - I'm reusing the electronics from the controller and the box I created for the tram system is now on the mantlepiece at my place. Even though this project was a bit rough to get to the finish line with, I'm thankful for my friends who stayed up late helping me / lent me parts and everyone who gave me advice.
 
 ## Sources
 
 Thanks to these sources for helping me:
 
-Dr. Sudhu's Arduino Tutorial: https://github.com/loopstick/ArduinoTutorial
+esp32_SocketIO: https://github.com/Valgueiro/esp32_SocketIO
 
-BART's API documentation: https://api.bart.gov/docs/overview/index.aspx
+@SquarePear's workshop: https://github.com/hackclub/hackclub/tree/main/workshops/particle_physics
 
-Taylor S. Marks' playsound module: https://github.com/TaylorSMarks/playsound
-
-[^1]: https://api.bart.gov/docs/stn/stns.aspx
+Socket.io's documentation: https://socket.io/get-started/chat
